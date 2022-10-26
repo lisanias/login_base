@@ -1,0 +1,33 @@
+{
+    "name": "lisanias/login",
+    "description": "Formação Full Stack PHP developer",
+    "minimum-stability":"dev",
+    "authors": [
+        {
+            "name": "Lisanias Loback",
+            "email": "lisanias@hotmail.com",
+            "homepage": "https://wwww.webig.pro.br",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Config.php",
+            "source/Helpers.php"
+        ]
+    },
+        "require": {
+        "ext-json": "*",
+        "coffeecode/router": "^2.0",
+        "coffeecode/datalayer": "^2.0",
+        "coffeecode/optimizer": "^2.1",
+        "phpmailer/phpmailer": "^6.5",
+        "matthiasmullie/minify": "*",
+        "league/plates": "v4.0.0-alpha", 
+        "league/oauth2-facebook": "*",
+        "league/oauth2-google": "*"
+    }
+}
