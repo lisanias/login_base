@@ -7,3 +7,7 @@ Um sistema de login completo, feito em PHP com recursos Javascript desenvolvidos
 - Cadastro
 - Login com Facebook
 - Login com Google
+
+### Configurar API das Redes Sociais
+- Facebook: [Developers Facebook](https://developers.facebook.com/)
+- Google: [Console](https://console.cloud.google.com/apis)
