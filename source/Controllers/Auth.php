@@ -198,7 +198,6 @@ class Auth extends Controller
             $this->router->redirect("web.login");
         }
 
-        // https://aprender.test/PHP/codigoaberto/t1/facebook?code=AQCpSRV0wdU9ntABTbDr8Poqjy60ii-27PockoGb_8WmLradZlGpHnVTMgI4qakTLuEqMzNpf5beh4gZd81Kmt8viso2p_B_-XjVMzjs96rmJ9JEREsvo7ZW58mP-eI6De3lAUOJurP-M2qzG025EnV3-0OAirjVtiNPcXDftvVetCrxSWdCYstxPgxTm3oSFJTDOQQCmYAwMhRKp6z4XGEPS-teESisEYwCVNBQRvImDNd6vIfKFnUlZy9pNr4_AdylAaBZj1YWf3lJge7jHYBZjpIwvvz72e5sEnliCjIJlrketQRHtGYSeEdN17Yc6Q2TyVqjzhJnyssOtzXro3Vtoj947h-9TqfJdww0uLYsi6S2JYXAZeQkImm13tJD4VuI0GhTA7r2lWNo0JJ03hZ7&state=e614751f95345556d7c2b3d0fe068077#_=_
         if ($code && empty($_SESSION["facebook_auth"])) {
             try {
                 $token = $facebook->getAccessToken("authorization_code",["code" => $code]);
@@ -268,6 +267,7 @@ class Auth extends Controller
         /** @var $google_user GooglekUser */
         $google_user = unserialize($_SESSION["google_auth"]);
         $user_by_id = (new User())->find("google_id = :id", "id={$google_user->getID()}")->fetch();
+
 
         // LOGIN BY GOOGLE ID
         if ($user_by_id) {
