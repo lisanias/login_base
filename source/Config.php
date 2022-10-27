@@ -35,12 +35,12 @@ if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") {
 
     // servidor de email online
     define("MAIL", [
-        "host" => "smtp.sendgrid.net",
-        "port" => "587",
-        "user" => "apikey",
-        "passwd" => "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",
-        "from_name" => "Lisanias Teste",
-        "from_email" => "contato@lisaniasloback.com" 
+        "host" => "mail.webig.pro.br",
+        "port" => "465",
+        "user" => "sagra213",
+        "passwd" => "eX1qf5N9f0",
+        "from_name" => "Webig Login Basico",
+        "from_email" => "contato@webig.pro.br" 
     ]);
 } else {
     // COnfiguração do servidor local
@@ -115,7 +115,7 @@ define("FACEBOOK_LOGIN", [
 define("GOOGLE_LOGIN", [
     'clientId'     => '1081599119050-vl24vs88732ur73ri0orfmbh1nca0bj4.apps.googleusercontent.com',
     'clientSecret' => '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',
-    'redirectUri'  => 'https://webig.pro.br/login/google',
+    'redirectUri'  => 'https://login.webig.pro.br/google',
 ]);
 
 /**
