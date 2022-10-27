@@ -6,38 +6,86 @@
 
 use Illuminate\Support\Facades\DB;
 
-define("SITE", [
-    "name" => "Auth em MVC com PHP",
-    "desc" => "Sistema de login com o google e facebook",
-    "domain" => "login.com",
-    "locale" => "pt_BR",
-    "root" => "https://aprender.test/PHP/codigoaberto/t1"
-]);
+if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") { 
 
-/**
- * SITE MINIFY
- */
-if ($_SERVER["SERVER_NAME"] == "aprender.test") {
+    // Configuração do servidor online
+    define("SITE", [
+        "name" => "Sistema de Login",
+        "desc" => "Sistema de login com o google e facebook",
+        "domain" => "login.webig.pro.br",
+        "locale" => "pt_BR",
+        "root" => "https://login.webig.pro.br"
+    ]);
+
+    // Configuração da Base de Dados
+    define("DATA_LAYER_CONFIG", [
+        "driver" => "mysql",
+        "host" => "localhost",
+        "port" => "3306",
+        "dbname" => "sagra213_login",
+        "username" => "sagra213_loback",
+        "passwd" => "lucas#3$1",
+        "options" => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_CASE => PDO::CASE_NATURAL
+        ]
+    ]);
+
+    // servidor de email online
+    define("MAIL", [ 
+        "host" => "smtp.sendgrid.net",
+        "port" => "587",
+        "user" => "apikey",
+        "passwd" => "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",
+        "from_name" => "Lisanias Teste",
+        "from_email" => "contato@lisaniasloback.com" 
+    ]);
+} else {
+    // COnfiguração do servidor local
+    define("SITE", [
+        "name" => "Sistema de Login",
+        "desc" => "Sistema de login com o google e facebook",
+        "domain" => "aprender.test",
+        "locale" => "pt_BR",
+        "root" => "https://aprender.test/PHP/codigoaberto/t1"
+    ]);
+
+    /**
+     * SITE MINIFY
+     */
     require __DIR__ . "/Minify.php";
+
+    /**
+     * DATABASE CONECT
+     */
+    define("DATA_LAYER_CONFIG", [
+        "driver" => "mysql",
+        "host" => "localhost",
+        "port" => "3306",
+        "dbname" => "auth",
+        "username" => "root",
+        "passwd" => "",
+        "options" => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_CASE => PDO::CASE_NATURAL
+        ]
+    ]);
+
+    // servidor de email para teste
+    define("MAIL", [ 
+        "host" => "smtp.sendgrid.net",
+        "port" => "587",
+        "user" => "apikey",
+        "passwd" => "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",
+        "from_name" => "Lisanias Teste",
+        "from_email" => "contato@lisaniasloback.com" 
+    ]);
 }
 
-/**
- * DATABASE CONECT
- */
-const DATA_LAYER_CONFIG = [
-    "driver" => "mysql",
-    "host" => "localhost",
-    "port" => "3306",
-    "dbname" => "auth",
-    "username" => "root",
-    "passwd" => "",
-    "options" => [
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-        PDO::ATTR_CASE => PDO::CASE_NATURAL
-    ]
-];
 
 /**
  * SOCIAL CONFIG
@@ -52,11 +100,29 @@ define("SOCIAL" , [
 ]);
 
 /**
- * MAIL CONNECT
+ * SOCIAL LOGIN: FACEBOOK
  */
- //Server settings
+define("FACEBOOK_LOGIN", [
+    'clientId'          => '1189602211631277',
+    'clientSecret'      => '14246e422f45192a3bb7d7589916a5d7',
+    'redirectUri'       => 'https://aprender.test/PHP/codigoaberto/t1/facebook',
+    'graphApiVersion'   => 'v15.0',
+]);
 
-define("MAIL2", [
+/**
+ *  SOCIAL LOGIN: GOOGLE
+ */
+define("GOOGLE_LOGIN", [
+    'clientId'     => '1081599119050-vl24vs88732ur73ri0orfmbh1nca0bj4.apps.googleusercontent.com',
+    'clientSecret' => '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',
+    'redirectUri'  => 'https://webig.pro.br/login/google',
+]);
+
+/**
+ * SERVIDORES DE EMAIL ALTERNATIVOS - NÃO UTILIZADOS
+ */
+
+ define("MAIL2", [
     "host" => "mail.lisaniasloback.com",
     "port" => "465",
     "user" => "contato@lisaniasloback.com",
@@ -64,6 +130,8 @@ define("MAIL2", [
     "from_name" => "Lisanias Loback",
     "from_email" => "contato@lisaniasloback.com" 
 ]);
+
+
 /**
  * MAILLAZI.COM
  * user:lisanias@hotmail.com
@@ -86,15 +154,6 @@ define("MAIL2", [
  * ports: 587 (25, 587 for unencrypted/TLS connections; 465	for SSL connections)
  * Username: apikey * 
  */
-define("MAIL", [
-    "host" => "smtp.sendgrid.net",
-    "port" => "587",
-    "user" => "apikey",
-    "passwd" => "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",
-    "from_name" => "Lisanias Teste",
-    "from_email" => "contato@lisaniasloback.com" 
-]);
-
 define("MAIL_mailazy", [
     "host" => "smtp.mailazy.com",
     "port" => "587",
@@ -102,24 +161,4 @@ define("MAIL_mailazy", [
     "passwd" => "wCwNKWYAwsRHrVvdqgddjsBzooQ.XGGSKXKpCUvpbJz67txmmc",
     "from_name" => "Lisanias Teste",
     "from_email" => "lisanias@hotmail.com" 
-]);
-
-
-/**
- * SOCIAL LOGIN: FACEBOOK
- */
-define("FACEBOOK_LOGIN", [
-    'clientId'          => '1189602211631277',
-    'clientSecret'      => '14246e422f45192a3bb7d7589916a5d7',
-    'redirectUri'       => 'https://aprender.test/PHP/codigoaberto/t1/facebook',
-    'graphApiVersion'   => 'v15.0',
-]);
-
-/**
- *  SOCIAL LOGIN: GOOGLE
- */
-define("GOOGLE_LOGIN", [
-    'clientId'     => '1081599119050-vl24vs88732ur73ri0orfmbh1nca0bj4.apps.googleusercontent.com',
-    'clientSecret' => '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',
-    'redirectUri'  => 'https://webig.pro.br/login/google',
 ]);
