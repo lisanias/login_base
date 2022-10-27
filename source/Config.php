@@ -34,7 +34,7 @@ if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") {
     ]);
 
     // servidor de email online
-    define("MAIL", [ 
+    define("MAIL", [
         "host" => "smtp.sendgrid.net",
         "port" => "587",
         "user" => "apikey",
