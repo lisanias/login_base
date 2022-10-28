@@ -24,8 +24,13 @@ class Web extends Controller
             routeImage("login")
         )->render();
 
+        $form_user = new \stdClass();
+        $form_user->email = !empty($_SESSION["facebook_auth"]) ? unserialize($_SESSION["facebook_auth"])->getEmail(): 
+            (!empty($_SESSION["google_auth"]) ? unserialize($_SESSION["google_auth"])->getEmail() : null);
+
         echo $this->view->render("theme/login", [
             "head" => $head,
+            "user" => $form_user
         ]);
     }
 

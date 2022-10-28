@@ -14,7 +14,7 @@
 
             <label>
                 <span class="field">E-mail:</span>
-                <input value="" type="email" name="email" placeholder="Informe seu e-mail:"/>
+                <input value="<?= $user->email; ?>" type="email" name="email" placeholder="Informe seu e-mail:"/>
             </label>
             <label>
                 <span class="field">Senha:</span>

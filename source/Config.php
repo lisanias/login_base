@@ -88,13 +88,24 @@ if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") {
     ]);
 
     // servidor de email para teste
-    define("MAIL", [ 
+    define("MAIL_sendgrid", [ 
         "host" => "smtp.sendgrid.net",
-        "port" => "587",
-        "user" => "apikey",
+        "port" => "587",        
+        "secure" => "ssl",
+        "username" => "apikey",
         "passwd" => "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",
         "from_name" => "Lisanias Teste",
         "from_email" => "contato@lisaniasloback.com" 
+    ]);
+    
+    define("MAIL", [
+        "host" => "mail.webig.pro.br",
+        "port" => "465",
+        "secure" => "ssl",
+        "username" => "contato@webig.pro.br",
+        "passwd" => "lucas#3$1",
+        "from_name" => "Webig Mail Test",
+        "from_email" => "contato@webig.pro.br"
     ]);
 
     /**

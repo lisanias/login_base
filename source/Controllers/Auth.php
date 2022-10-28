@@ -123,13 +123,22 @@ class Auth extends Controller
             ]),
             recipient_name: "{$user->first_name} {$user->last_name}",
             recipient_email: $user->email
-        )->send();
+        );
+
+        if (!$email->send()) {
+            flash("error", "erro no email: <br>{$email->error()->getMessage()}");
+
+            echo $this->ajaxResponse("redirect", [
+                "url" => $this->router->route("web.forget")
+            ]);
+        }  
 
         flash("success", "Enviamos um link de recuperação para seu e-mail");
 
         echo $this->ajaxResponse("redirect", [
             "url" => $this->router->route("web.forget")
         ]);
+
     }
 
     public function reset($data): void
@@ -194,7 +203,7 @@ class Auth extends Controller
         }
 
         if ($error) {
-            flash("error", "Não foi possivel logar com o Facebook");
+            flash("error", "Não foi possivel logar com o Facebook (1)");
             $this->router->redirect("web.login");
         }
 
@@ -203,7 +212,7 @@ class Auth extends Controller
                 $token = $facebook->getAccessToken("authorization_code",["code" => $code]);
                 $_SESSION["facebook_auth"] = serialize($facebook->getResourceOwner($token));
             } catch ( \Exception $exception) {
-                flash("error", "Não foi possivel logar com o Facebook");
+                flash("error", "Não foi possivel logar com o Facebook (2)");
                 $this->router->redirect("web.login");
             }
         } 
@@ -224,7 +233,7 @@ class Auth extends Controller
         $user_by_email = (new User())->find("email = :e", "e={$facebook_user->getEmail()}")->fetch();
         if ($user_by_email) {
             flash("info", "Faça {$facebook_user->getFirstName()}, faça login para conectar seu Facebook");
-            $this->router->redirect("app.home");
+            $this->router->redirect("web.login");
         }
 
         // REGISTRAR O USUÁRIO DO FACEBOOK SE AINDA NÃO ESTIVER CADASTRADO LOCALMENTE
@@ -303,7 +312,7 @@ class Auth extends Controller
             /** @var $facebook_user FacebookUser */
             $facebook_user = unserialize($_SESSION["facebook_auth"]);
 
-            $user->facebook_id= $facebook_user->getID();
+            $user->facebook_id = $facebook_user->getID();
             $user->photo = $facebook_user->getPictureUrl();
             $user->save();
 
