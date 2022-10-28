@@ -37,11 +37,23 @@ if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") {
     define("MAIL", [
         "host" => "mail.webig.pro.br",
         "port" => "465",
-        "user" => "sagra213",
-        "passwd" => "eX1qf5N9f0",
-        "from_name" => "Webig Login Basico",
-        "from_email" => "contato@webig.pro.br" 
+        "secure" => "ssl",
+        "username" => "contato@webig.pro.br",
+        "passwd" => "lucas#3$1",
+        "from_name" => "Webig Mail Test",
+        "from_email" => "contato@webig.pro.br"
     ]);
+
+    /**
+     * SOCIAL LOGIN: FACEBOOK
+     */
+    define("FACEBOOK_LOGIN", [
+        'clientId'          => '1412139212315367',
+        'clientSecret'      => 'f2844edd8f20872232024c3c645ce4cd',
+        'redirectUri'       => 'https://login.webig.pro.br/facebook',
+        'graphApiVersion'   => 'v15.0',
+    ]);
+
 } else {
     // COnfiguração do servidor local
     define("SITE", [
@@ -84,6 +96,16 @@ if ($_SERVER["SERVER_NAME"] == "login.webig.pro.br") {
         "from_name" => "Lisanias Teste",
         "from_email" => "contato@lisaniasloback.com" 
     ]);
+
+    /**
+     * SOCIAL LOGIN: FACEBOOK
+     */
+    define("FACEBOOK_LOGIN", [
+        'clientId'          => '1189602211631277',
+        'clientSecret'      => '14246e422f45192a3bb7d7589916a5d7',
+        'redirectUri'       => 'https://aprender.test/PHP/codigoaberto/t1/facebook',
+        'graphApiVersion'   => 'v15.0',
+    ]);
 }
 
 
@@ -97,16 +119,6 @@ define("SOCIAL" , [
     "twitter_creator" => "@lisaniasloback",
     "twitter_site" => "@lisaniasloback",
     "email" => "pastorlisanias@gmail.com"
-]);
-
-/**
- * SOCIAL LOGIN: FACEBOOK
- */
-define("FACEBOOK_LOGIN", [
-    'clientId'          => '1189602211631277',
-    'clientSecret'      => '14246e422f45192a3bb7d7589916a5d7',
-    'redirectUri'       => 'https://aprender.test/PHP/codigoaberto/t1/facebook',
-    'graphApiVersion'   => 'v15.0',
 ]);
 
 /**

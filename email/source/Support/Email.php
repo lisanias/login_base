@@ -22,10 +22,10 @@ class Email
     {
         $this->mail = new PHPMailer(true);
         $this->data = new stdClass();
-        
+
         $this->mail->isSMTP();
         $this->mail->isHTML();
-        $this->mail->setLanguage('pt-br');
+        $this->mail->setLanguage("pt_br");
 
         $this->mail->SMTPAuth = true;
         $this->mail->CharSet = "utf-8";

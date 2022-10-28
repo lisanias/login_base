@@ -1,0 +1,28 @@
+{
+    "name": "lisanias/email",
+    "description": "integração do PHPMail com a aplicação Web",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lisanias Loback",
+            "email": "contato@webig.pro.br",
+            "role": "Developer",
+            "homepage": "https://webig.pro.br"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Config.php"
+        ]
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
